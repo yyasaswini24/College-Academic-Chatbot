@@ -1,0 +1,35 @@
+[theme]
+font = "Inter:https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+headingFont = "'Space Grotesk':https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap"
+codeFont = "'JetBrains Mono':https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap"
+baseRadius = "large"
+buttonRadius = "full"
+showWidgetBorder = true
+headingFontWeights = [700, 600, 600, 600, 500, 500]
+linkUnderline = false
+
+[theme.dark]
+primaryColor = "#8B5CF6"
+backgroundColor = "#07071A"
+secondaryBackgroundColor = "#14152E"
+textColor = "#E8E8F5"
+borderColor = "#2A2B4A"
+linkColor = "#22D3EE"
+codeBackgroundColor = "#0E0F24"
+
+[theme.dark.sidebar]
+backgroundColor = "#0B0B22"
+secondaryBackgroundColor = "#17183A"
+
+[theme.light]
+primaryColor = "#7C3AED"
+backgroundColor = "#F7F7FC"
+secondaryBackgroundColor = "#EEEDF9"
+textColor = "#1E1B3A"
+borderColor = "#DDDBF0"
+linkColor = "#0891B2"
+codeBackgroundColor = "#F1F0FA"
+
+[theme.light.sidebar]
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#F1F0FA"

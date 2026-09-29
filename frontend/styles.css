@@ -1,0 +1,434 @@
+/* ============ Palette (dark by default; styles-light.css overrides these) ============ */
+:root {
+    --violet: #8B5CF6;
+    --indigo: #6366F1;
+    --cyan: #22D3EE;
+    --pink: #EC4899;
+
+    --bg: #07071A;
+    --text-muted: rgba(232, 232, 245, 0.7);
+    --glass: rgba(255, 255, 255, 0.04);
+    --glass-border: rgba(255, 255, 255, 0.09);
+    --shadow: rgba(0, 0, 0, 0.25);
+    --grid: rgba(255, 255, 255, 0.025);
+    --aurora-1: rgba(139, 92, 246, 0.28);
+    --aurora-2: rgba(34, 211, 238, 0.18);
+    --aurora-3: rgba(236, 72, 153, 0.16);
+    --sidebar-bg: rgba(11, 11, 34, 0.72);
+    --user-bubble: linear-gradient(135deg, rgba(139, 92, 246, 0.35), rgba(99, 102, 241, 0.2));
+    --title-gradient: linear-gradient(90deg, #FFFFFF, #C4B5FD, #22D3EE, #F9A8D4, #FFFFFF);
+    --accent-text: #22D3EE;
+}
+
+/* ============ Animated aurora background ============ */
+[data-testid="stApp"] {
+    background:
+        radial-gradient(600px circle at 15% 20%, var(--aurora-1), transparent 60%),
+        radial-gradient(520px circle at 85% 25%, var(--aurora-2), transparent 60%),
+        radial-gradient(700px circle at 50% 100%, var(--aurora-3), transparent 60%),
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+        var(--bg) !important;
+    background-size: 200% 200%, 200% 200%, 200% 200%, 44px 44px, 44px 44px, auto !important;
+    animation: aurora 20s ease-in-out infinite alternate;
+}
+
+@keyframes aurora {
+    0%   { background-position: 0% 0%,   100% 0%,  50% 100%, 0 0, 0 0, 0 0; }
+    50%  { background-position: 60% 40%, 30% 70%,  10% 40%,  0 0, 0 0, 0 0; }
+    100% { background-position: 100% 90%, 0% 30%, 90% 10%,  0 0, 0 0, 0 0; }
+}
+
+[data-testid="stAppViewContainer"],
+[data-testid="stMain"] {
+    background: transparent !important;
+}
+
+/* Fade instead of a hard edge, so scrolled messages don't show behind the top bar */
+[data-testid="stHeader"] {
+    background: linear-gradient(to bottom, var(--bg) 55%, transparent) !important;
+}
+
+[data-testid="stBottom"],
+[data-testid="stBottom"] > div,
+[data-testid="stBottomBlockContainer"] {
+    background: linear-gradient(to top, var(--bg) 60%, transparent) !important;
+}
+
+/* ============ Hero (empty chat) ============ */
+.hero {
+    text-align: center;
+    padding: 2.5rem 0 1rem;
+}
+
+.hero > * {
+    animation: fadeUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.hero > :nth-child(2) { animation-delay: 0.15s; }
+.hero > :nth-child(3) { animation-delay: 0.3s; }
+
+.orb-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.orb {
+    position: relative;
+    width: 110px;
+    height: 110px;
+    display: grid;
+    place-items: center;
+    animation: float 5s ease-in-out infinite;
+}
+
+.orb::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #C4B5FD, #7C3AED 55%, #312E81);
+    box-shadow:
+        0 0 60px rgba(139, 92, 246, 0.65),
+        0 0 120px rgba(34, 211, 238, 0.25),
+        inset 0 0 25px rgba(255, 255, 255, 0.25);
+    animation: glow 3s ease-in-out infinite alternate;
+}
+
+.ring {
+    position: absolute;
+    inset: -14px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    border-top-color: var(--cyan);
+    border-right-color: rgba(34, 211, 238, 0.25);
+    animation: spin 6s linear infinite;
+}
+
+.ring.r2 {
+    inset: -28px;
+    border-top-color: transparent;
+    border-bottom-color: var(--pink);
+    border-left-color: rgba(236, 72, 153, 0.25);
+    animation-duration: 10s;
+    animation-direction: reverse;
+}
+
+.cap {
+    position: relative;
+    font-size: 52px;
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.4));
+}
+
+.hero-title {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.15;
+    margin: 0 0 0.8rem;
+    padding: 0;
+}
+
+.gradient-text {
+    background: var(--title-gradient);
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shine 8s linear infinite;
+}
+
+.hero-sub {
+    font-size: 1.15rem;
+    color: var(--text-muted);
+}
+
+/* Rotating word: last item repeats the first for a seamless loop */
+.rotator {
+    display: inline-block;
+    height: 1.5em;
+    overflow: hidden;
+    vertical-align: bottom;
+}
+
+.rotator span {
+    display: block;
+    height: 1.5em;
+    line-height: 1.5em;
+    font-weight: 600;
+    color: var(--accent-text);
+    text-align: left;
+    animation: rotateWords 10s cubic-bezier(0.7, 0, 0.3, 1) infinite;
+}
+
+/* Compact header once chatting */
+.mini-header {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.5rem 0 1rem;
+    animation: fadeUp 0.6s ease both;
+}
+
+.mini-orb {
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 20px;
+    background: radial-gradient(circle at 30% 30%, #C4B5FD, #7C3AED 55%, #312E81);
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.6);
+    animation: glow 3s ease-in-out infinite alternate;
+}
+
+.mini-title {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+/* ============ Suggestion pills ============ */
+.st-key-suggestions {
+    animation: fadeUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.45s both;
+}
+
+.st-key-suggestions button {
+    background: var(--glass) !important;
+    border: 1px solid var(--glass-border) !important;
+    backdrop-filter: blur(10px);
+    padding: 0.55rem 1.1rem !important;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease !important;
+}
+
+.st-key-suggestions button:hover {
+    transform: translateY(-4px) scale(1.03);
+    border-color: rgba(139, 92, 246, 0.7) !important;
+    box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+}
+
+/* ============ Chat messages ============ */
+[data-testid="stChatMessage"] {
+    background: var(--glass) !important;
+    border: 1px solid var(--glass-border);
+    border-radius: 22px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 0.8rem;
+    backdrop-filter: blur(14px);
+    box-shadow: 0 8px 32px var(--shadow);
+    animation: slideInLeft 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+[data-testid="stChatMessage"]:has([aria-label="Chat message from user"]) {
+    flex-direction: row-reverse;
+    margin-left: 12%;
+    background: var(--user-bubble) !important;
+    border-color: rgba(139, 92, 246, 0.45);
+    animation-name: slideInRight;
+}
+
+/* Keep headings inside answers readable instead of page-sized */
+[data-testid="stChatMessageContent"] h1 { font-size: 1.45rem; }
+[data-testid="stChatMessageContent"] h2 { font-size: 1.25rem; }
+[data-testid="stChatMessageContent"] h3 { font-size: 1.1rem; }
+[data-testid="stChatMessageContent"] h4,
+[data-testid="stChatMessageContent"] h5,
+[data-testid="stChatMessageContent"] h6 { font-size: 1rem; }
+
+/* Wide formulas and code scroll inside the bubble instead of spilling out */
+[data-testid="stChatMessageContent"] {
+    min-width: 0;
+    overflow-x: auto;
+}
+
+[data-testid^="stChatMessageAvatar"] {
+    background: linear-gradient(135deg, var(--violet), var(--cyan)) !important;
+    color: #FFFFFF !important;
+    border-radius: 50% !important;
+    box-shadow: 0 0 16px rgba(139, 92, 246, 0.55);
+}
+
+[data-testid^="stChatMessageAvatar"] * {
+    color: #FFFFFF !important;
+}
+
+[data-testid="stChatMessage"]:has([aria-label="Chat message from user"]) [data-testid^="stChatMessageAvatar"] {
+    background: linear-gradient(135deg, var(--pink), var(--violet)) !important;
+    box-shadow: 0 0 16px rgba(236, 72, 153, 0.5);
+}
+
+[data-testid="stChatMessage"]:has([aria-label="Chat message from assistant"]) [data-testid^="stChatMessageAvatar"] {
+    animation: pulse 2.5s ease-in-out infinite;
+}
+
+/* Typing indicator */
+.typing {
+    display: flex;
+    gap: 7px;
+    padding: 0.7rem 0.2rem;
+}
+
+.typing span {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--violet), var(--cyan));
+    animation: bounce 1.2s ease-in-out infinite;
+}
+.typing span:nth-child(2) { animation-delay: 0.15s; }
+.typing span:nth-child(3) { animation-delay: 0.3s; }
+
+/* ============ Chat input: glowing border that cycles colours ============ */
+/* Styled on the inner box (which owns Streamlit's border and rounded corners),
+   so the glow follows the native shape instead of clipping the corners. */
+[data-testid="stChatInput"] > div {
+    border-width: 2px !important;
+    animation: borderColors 6s linear infinite, inputGlow 3s ease-in-out infinite alternate;
+    transition: transform 0.25s ease;
+}
+
+[data-testid="stChatInput"]:focus-within > div {
+    transform: translateY(-2px);
+}
+
+/* ============ Sidebar ============ */
+[data-testid="stSidebar"] {
+    background: var(--sidebar-bg) !important;
+    backdrop-filter: blur(18px);
+    border-right: 1px solid rgba(139, 92, 246, 0.25);
+}
+
+.st-key-new_chat button {
+    background: linear-gradient(90deg, var(--violet), var(--indigo), var(--cyan), var(--violet)) !important;
+    background-size: 300% 100% !important;
+    border: none !important;
+    color: #FFFFFF !important;
+    font-weight: 600;
+    box-shadow: 0 6px 24px rgba(139, 92, 246, 0.4);
+    animation: shine 6s linear infinite;
+    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.st-key-new_chat button:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 10px 32px rgba(34, 211, 238, 0.4);
+}
+
+.st-key-new_chat button:disabled {
+    opacity: 0.45;
+    animation: none;
+    box-shadow: none;
+}
+
+[class*="st-key-open_"] button {
+    justify-content: flex-start !important;
+    text-align: left;
+    transition: transform 0.25s ease, background 0.25s ease !important;
+    animation: fadeUp 0.5s ease both;
+}
+
+[class*="st-key-open_"] button p {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+[class*="st-key-open_"] button:hover {
+    transform: translateX(5px);
+    background: rgba(139, 92, 246, 0.15) !important;
+}
+
+[class*="st-key-delete_"] button {
+    opacity: 0.4;
+    transition: opacity 0.2s ease, color 0.2s ease, transform 0.2s ease !important;
+}
+
+[class*="st-key-delete_"] button:hover {
+    opacity: 1;
+    color: #F87171 !important;
+    transform: scale(1.15) rotate(-8deg);
+}
+
+/* ============ Details ============ */
+::selection {
+    background: rgba(139, 92, 246, 0.35);
+}
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(var(--violet), var(--cyan));
+    border-radius: 8px;
+}
+
+/* ============ Keyframes ============ */
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-24px) scale(0.98); }
+    to   { opacity: 1; transform: translateX(0) scale(1); }
+}
+
+@keyframes slideInRight {
+    from { opacity: 0; transform: translateX(24px) scale(0.98); }
+    to   { opacity: 1; transform: translateX(0) scale(1); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-12px); }
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes glow {
+    from { filter: brightness(0.95); }
+    to   { filter: brightness(1.2); }
+}
+
+@keyframes shine {
+    to { background-position: 300% 0; }
+}
+
+@keyframes rotateWords {
+    0%, 20%   { transform: translateY(0); }
+    25%, 45%  { transform: translateY(-100%); }
+    50%, 70%  { transform: translateY(-200%); }
+    75%, 95%  { transform: translateY(-300%); }
+    100%      { transform: translateY(-400%); }
+}
+
+@keyframes pulse {
+    0%, 100% { box-shadow: 0 0 10px rgba(139, 92, 246, 0.45); }
+    50%      { box-shadow: 0 0 26px rgba(34, 211, 238, 0.75); }
+}
+
+@keyframes bounce {
+    0%, 80%, 100% { transform: translateY(0); opacity: 0.5; }
+    40%           { transform: translateY(-9px); opacity: 1; }
+}
+
+@keyframes borderColors {
+    0%, 100% { border-color: var(--violet); }
+    33%      { border-color: var(--cyan); }
+    66%      { border-color: var(--pink); }
+}
+
+@keyframes inputGlow {
+    from { box-shadow: 0 0 16px rgba(139, 92, 246, 0.25); }
+    to   { box-shadow: 0 0 32px rgba(34, 211, 238, 0.35); }
+}
+
+/* Respect users who turn off animations in their OS */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+}

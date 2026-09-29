@@ -1,0 +1,16 @@
+/* Light mode: loaded after styles.css, only swaps the palette */
+:root {
+    --bg: #F7F7FC;
+    --text-muted: rgba(30, 27, 58, 0.65);
+    --glass: rgba(255, 255, 255, 0.72);
+    --glass-border: rgba(99, 102, 241, 0.16);
+    --shadow: rgba(76, 29, 149, 0.08);
+    --grid: rgba(30, 27, 58, 0.04);
+    --aurora-1: rgba(139, 92, 246, 0.18);
+    --aurora-2: rgba(34, 211, 238, 0.14);
+    --aurora-3: rgba(236, 72, 153, 0.1);
+    --sidebar-bg: rgba(255, 255, 255, 0.75);
+    --user-bubble: linear-gradient(135deg, rgba(139, 92, 246, 0.16), rgba(99, 102, 241, 0.08));
+    --title-gradient: linear-gradient(90deg, #4C1D95, #7C3AED, #0891B2, #DB2777, #4C1D95);
+    --accent-text: #0891B2;
+}

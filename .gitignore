@@ -1,0 +1,13 @@
+# Secrets: never commit your API key
+.env
+.streamlit/secrets.toml
+frontend/.streamlit/secrets.toml
+
+# Python virtual environment and caches
+.venv/
+__pycache__/
+*.pyc
+
+# Personal data created while using the app
+data/chats/
+data/vector_store/
